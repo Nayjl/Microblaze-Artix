@@ -55,7 +55,7 @@ module topmodule (
     input  wire UART_RX_M16_7,
     output wire UART_TX_N13_8,
 
-    output wire USER_LED
+    inout wire USER_LED
 );
 
 wire [15 : 0] sdram_0_data;

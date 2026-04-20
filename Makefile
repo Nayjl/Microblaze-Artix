@@ -18,7 +18,7 @@ HW_PLATFORM ?= hw_platform_0
 PRJ_DEVICE_TREE ?= device_tree_bsp_0
 #---------------------------------------------------------------------------------------------------------------
 PATH_HW_PRJ ?= $(CUR_DIR_PRJ)/hw/prj_hw
-NAME_HW_PRJ ?= qmtech_lnx
+NAME_HW_PRJ ?= artix
 NAME_BD ?= topdesign
 PATH_EXPORT_HDF ?= $(SDK_PRJ_WKSP)
 #---------------------------------------------------------------------------------------------------------------

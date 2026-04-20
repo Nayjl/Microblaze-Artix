@@ -1,5 +1,5 @@
 CUR_DIR_BR := $(shell pwd)
-NAME_BOARD ?= qmtechz10
+NAME_BOARD ?= artix35
 SDK_PRJ_WKSP ?= board/$(NAME_BOARD)/spec_hw
 FSBL_SDK ?= fsbl
 FSBL_BSP_SDK ?= $(FSBL_SDK)_bsp
