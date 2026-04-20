@@ -1,0 +1,4 @@
+source "$BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/package/xvc-server/Config.in"
+source "$BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/package/udevmem/Config.in"
+source "$BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/package/cma_dma_pl/Config.in"
+source "$BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/package/xadc-lnx/Config.in"

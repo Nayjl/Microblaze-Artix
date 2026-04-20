@@ -1,0 +1,15 @@
+# SDK
+.metadata/
+device_tree_bsp_0/
+fsbl/
+fsbl_bsp/
+RemoteSystemsTempFiles/
+*hw_platform_0/
+webtalk/
+*.hdf
+devicetree.dts
+
+#Vivado logs
+*.log
+*.jou
+*.cmd

@@ -1,0 +1,1 @@
+nayjl -1 nayjl -1 = /home/nayjl /bin/sh dialout,users,i2c,spi,gpio,uio Nayjl user

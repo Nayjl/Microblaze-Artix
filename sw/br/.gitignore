@@ -1,0 +1,22 @@
+# BuildRoot
+output/
+
+# Object files
+*.o
+*.d
+*.ko
+*.obj
+*.elf
+*.out
+
+#Vivado logs
+*.log
+*.jou
+*.cmd
+
+# RootFS Overlay
+board/**/dropbear_ed25519_host_key
+
+.Xil/
+
+!profile.d/

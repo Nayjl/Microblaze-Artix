@@ -1,0 +1,17 @@
+XADC_LNX_VERSION = 0.0.1
+XADC_LNX_SITE = $(BR2_EXTERNAL_CUSTOM_PACKAGE_PATH)/dl/xadc-lnx
+XADC_LNX_SITE_METHOD = local
+# XILINX_VIRTUAL_CABLE_LICENSE = GPL-2.0+  
+# XILINX_VIRTUAL_CABLE_LICENSE_FILES = LICENSE
+
+
+define XADC_LNX_BUILD_CMDS
+	$(MAKE) -C $(@D) CCC=$(TARGET_CC) all
+endef
+
+
+define XADC_LNX_INSTALL_TARGET_CMDS
+	$(INSTALL) -D -m 0755 $(@D)/xadc-lnx-0.0.1 $(TARGET_DIR)/usr/bin/xadclnx
+endef
+
+$(eval $(generic-package))

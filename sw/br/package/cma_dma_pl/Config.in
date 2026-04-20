@@ -1,0 +1,15 @@
+config BR2_PACKAGE_CMA_DMA_PL
+    bool "cma-dma-pl driver"
+    depends on BR2_LINUX_KERNEL
+    help
+      Linux kernel driver for CMA DMA PL.
+      This driver provides DMA functionality for PL fabric in Xilinx Zynq devices.
+
+if BR2_PACKAGE_CMA_DMA_PL
+config BR2_PACKAGE_DEAMON_CMA_DMA_PL
+    bool "deamon cma-dma-pl driver"
+    depends on BR2_LINUX_KERNEL
+    help
+      Linux kernel driver for CMA DMA PL.
+      This driver provides DMA functionality for PL fabric in Xilinx Zynq devices.
+endif

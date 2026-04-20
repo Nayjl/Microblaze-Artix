@@ -1,0 +1,4 @@
+config BR2_PACKAGE_UDEVMEM
+	bool "udevmem"
+	help
+		Application on Linux for programming other FPGA or debug insert FPGA using Ethernet

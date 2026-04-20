@@ -1,0 +1,27 @@
+/dts-v1/;
+/ {
+    description = "Linux Kernel Image for Zynq-7000";
+    #address-cells = <1>;
+    images {
+        kernel {
+            description = "Linux Kernel";
+            data = /incbin/("zImage");
+            type = "kernel";
+            arch = "arm";
+            os = "linux";
+            compression = "none";
+            load = <0x8000>;
+            entry = <0x8000>;
+            hash {
+                algo = "sha1";
+            };
+        };
+    };
+    configurations {
+        default = "conf";
+        conf {
+            description = "Boot Linux kernel only";
+            kernel = "kernel";
+        };
+    };
+};

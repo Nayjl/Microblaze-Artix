@@ -1,0 +1,4 @@
+config BR2_PACKAGE_XADC_LNX
+	bool "XADC monitor"
+	help
+		Application on Linux for programming other FPGA or debug insert FPGA using Ethernet

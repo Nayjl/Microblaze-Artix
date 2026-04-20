@@ -1,0 +1,2 @@
+config BR2_PACKAGE_XVC_SERVER
+	bool "xilinx virtual cable server"

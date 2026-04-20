@@ -1,0 +1,17 @@
+#Vivado
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+*.sdk/
+*.tmp/
+*.srcs/
+
+#Vivado logs
+*.log
+*.jou
+*.cmd
+
+NA/
+.Xil/
