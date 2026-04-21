@@ -1,39 +1,5 @@
 /dts-v1/;
 #include "system-top.dts"
 
-&debug_bridge_inter {
-    compatible = "generic-uio";
-};
 
-&gem0 {
-    phy-mode = "rgmii-id";
-    local-mac-address = [00 0a 35 00 00 00];
-    phy-handle = <&eth_phy0>;
-    eth_phy0: ethernet-phy@0 {
-        reg = <0x00>;
-        device_type = "ethernet-phy";
-    };
-};
 
-&usb0 {
-    dr_mode = "otg";
-    usb-phy = <&usb_phy0>;
-    usb_phy0: usb_phy@0 {
-        compatible = "ulpi-phy";
-        #phy-cells = <0>;
-        reg = <0xe0002000 0x1000>;
-        view-port = <0x0170>;
-        drv-vbus;
-    };
-};
-
-/ {
-    chosen {
-        bootargs = "earlycon";
-        stdout-path = "serial0:115200n8";
-    };
-
-    aliases {
-        mmc0 = &sdhci0;
-    };
-};
