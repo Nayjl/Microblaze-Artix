@@ -23,50 +23,47 @@ cpp -P -C -nostdinc -I. -D QSPI_OFFSET_BISTREAM=$QSPI_OFFSET_BISTREAM -D QSPI_OF
 $BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/mkimage -A arm -T script -C none -d boot.cmd boot.scr
 rm -f boot.cmd boot.cmd.in boot-config.h
 
-$BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/mkimage -A arm -O linux -T kernel -C none -a 0x8000 -e 0x8000 -n "Linux Kernel" -d zImage uImage
+$BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/mkimage -A arm -O linux -T kernel -C none -a 0x8000 -e 0x8000 -n "Linux Kernel" -d linux.bin uImage
 cp rootfs.cpio.uboot uramdisk.image
 # $BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/mkimage -A arm -O linux -T ramdisk -C lzma -n "Root Filesystem" -d rootfs.cpio.lzma uramdisk.image
 # -------------------------------------------------------------------------------------------------------------------
 
 # -------------------------------------------------------------------------------------------------------------------
-cat << EOF > qspi.bif
-//arch = zynq; split = false; format = BIN
-the_ROM_image:
-{
-	[bootloader] fsbl.elf
-	u-boot.elf
-	[offset = ${QSPI_OFFSET_BOOT_SCR}] boot.scr
-	[offset = ${QSPI_OFFSET_BISTREAM}] firmware_fpga.bit.lzma
-	[offset = ${QSPI_OFFSET_IMAGE}] image.ub
-}
-EOF
-$BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/bootgen -image qspi.bif -arch zynq -o QSPI.bin -w
-rm -f qspi.bif
+# cat << EOF > qspi.bif
+# //arch = microblaze; split = false; format = BIN
+# the_ROM_image:
+# {
+# 	[offset = ${QSPI_OFFSET_BOOT_SCR}] boot.scr
+# 	[offset = ${QSPI_OFFSET_IMAGE}] image.ub
+# }
+# EOF
+# $BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/bootgen -image qspi.bif -arch microblaze -o QSPI.bin -w
+# rm -f qspi.bif
 
-cat << EOF > fsbl.bif
-//arch = zynq; split = false; format = BIN
-the_ROM_image:
-{
-	[bootloader] fsbl.elf
-	u-boot.elf
-}
-EOF
-$BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/bootgen -image fsbl.bif -arch zynq -o BOOT.bin -w
-rm -f fsbl.bif
+# cat << EOF > fsbl.bif
+# //arch = zynq; split = false; format = BIN
+# the_ROM_image:
+# {
+# 	[bootloader] fsbl.elf
+# 	u-boot.elf
+# }
+# EOF
+# $BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/bootgen -image fsbl.bif -arch zynq -o BOOT.bin -w
+# rm -f fsbl.bif
 
 # -------------------------------------------------------------------------------------------------------------------
-GENIMAGE_TMP="genimage.tmp"
-trap 'rm -rf "${ROOTPATH_TMP}"' EXIT
-ROOTPATH_TMP="$(mktemp -d)"
-rm -rf "${GENIMAGE_TMP}"
-$BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/genimage \
---rootpath "${ROOTPATH_TMP}" \
---inputpath $1 \
---outputpath $1 \
---tmppath "${GENIMAGE_TMP}" \
---config genimage.cfg
-rm -rf "${GENIMAGE_TMP}"
-rm -rf genimage.cfg
+# GENIMAGE_TMP="genimage.tmp"
+# trap 'rm -rf "${ROOTPATH_TMP}"' EXIT
+# ROOTPATH_TMP="$(mktemp -d)"
+# rm -rf "${GENIMAGE_TMP}"
+# $BR2_EXTERNAL_CUSTOM_PACKAGE_PATH/output/host/bin/genimage \
+# --rootpath "${ROOTPATH_TMP}" \
+# --inputpath $1 \
+# --outputpath $1 \
+# --tmppath "${GENIMAGE_TMP}" \
+# --config genimage.cfg
+# rm -rf "${GENIMAGE_TMP}"
+# rm -rf genimage.cfg
 # -------------------------------------------------------------------------------------------------------------------
 exit $?
 # -------------------------------------------------------------------------------------------------------------------

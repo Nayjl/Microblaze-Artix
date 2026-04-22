@@ -1,8 +1,8 @@
 # SDK
 .metadata/
 device_tree_bsp_0/
-fsbl/
-fsbl_bsp/
+mb_bootloader/
+mb_bootloader_bsp/
 RemoteSystemsTempFiles/
 *hw_platform_0/
 webtalk/

@@ -145,7 +145,7 @@ clean_br:
 	@rm -rfv output
 
 conf_uboot: 
-	@echo 'CONFIG_BOOTCOMMAND="mmc dev 0 && fatload mmc 0 0x2000000 boot.scr && source 0x2000000"' > board/$(NAME_BOARD)/uboot-fragment.cfg
+	@echo 'CONFIG_BOOTCOMMAND="sf probe 0 0 0 && sf read 0x2000000 $(QSPI_OFFSET_BOOT_SCR) 0x40000 && source 0x2000000"' > board/$(NAME_BOARD)/uboot-fragment.cfg
 #---------------------------------------------------------------------------------------------------------------
 dt_all: sdk_all dts_compile dtb_compile
 dts_compile: 

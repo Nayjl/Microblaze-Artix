@@ -43,14 +43,14 @@ createhw -name $name_hw_platform -hwspec $hdf_filename
 puts "Hardware Platform создана: $name_hw_platform"
 
 
-createapp -name $name_prj_fsbl -hwproject $name_hw_platform -proc ps7_cortexa9_0 -os standalone -lang C -app "Zynq FSBL"
+createapp -name $name_prj_fsbl -hwproject $name_hw_platform -proc microblaze_0 -os standalone -lang C -app "SREC SPI Bootloader"
 puts "Проект FSBL создан: $name_prj_fsbl"
 projects -build -type bsp -name $name_prj_fsbl_bsp
 projects -build -type app -name $name_prj_fsbl
 
 
 
-createbsp -name $name_prj_devicetree -hwproject $name_hw_platform -proc ps7_cortexa9_0 -os device_tree
+createbsp -name $name_prj_devicetree -hwproject $name_hw_platform -proc microblaze_0 -os device_tree
 puts "BSP создан: $name_prj_devicetree"
 
 

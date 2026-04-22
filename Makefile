@@ -12,7 +12,7 @@ endif
 #---------------------------------------------------------------------------------------------------------------
 NAME_BOARD ?= $(BR2_TARGET_GENERIC_HOSTNAME)
 SDK_PRJ_WKSP ?= $(CUR_DIR_PRJ)/sw/br/board/$(NAME_BOARD)/spec_hw
-FSBL_SDK ?= fsbl
+FSBL_SDK ?= mb_bootloader
 FSBL_BSP_SDK ?= $(FSBL_SDK)_bsp
 HW_PLATFORM ?= hw_platform_0
 PRJ_DEVICE_TREE ?= device_tree_bsp_0

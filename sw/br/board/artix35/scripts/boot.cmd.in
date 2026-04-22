@@ -1,82 +1,11 @@
-#include "boot-config.h"
-setenv bootmode_run nram
 setenv addr_krnl 0x2008000
-setenv addr_dtb 0x2004000
-setenv addr_rtfs 0x3000000
 setenv addr_image_qspi QSPI_OFFSET_IMAGE
 setenv size_image_qspi 0x1000000
-setenv addr_bitstream_qspi QSPI_OFFSET_BISTREAM
-setenv size_bitstream_qspi QSPI_OFFSET_IMAGE
-setenv nm_krnl uImage
-setenv nm_dtb devicetree.dtb
-setenv nm_rtfs uramdisk.image
 setenv bootargs_min earlycon console=ttyPS0,115200 uio_pdrv_genirq.of_id=generic-uio
 setenv bootmode_qspi 'sf read ${addr_krnl} ${addr_image_qspi} ${size_image_qspi}'
-setenv bootmode_mmc0 'fatload mmc 0:1 ${addr_krnl} ${nm_krnl} && fatload mmc 0:1 ${addr_dtb} ${nm_dtb}'
-setenv bootmode_mmc1 'fatload mmc 1:1 ${addr_krnl} ${nm_krnl} && fatload mmc 1:1 ${addr_dtb} ${nm_dtb}'
-setenv program_fpga_mmc 'fpga loadb 0 ${addr_dtb} ${filesize}'
-setenv load_bitstream_qspi 'sf read ${addr_dtb} ${addr_bitstream_qspi} ${size_bitstream_qspi}'
 setenv bootargs ${bootargs_min} root=/dev/ram0 rw rootfstype=cpio rootwait cma=128M
-mmc dev 0
-if test $? -eq 0; then
-    if test -e mmc 0:1 /firmware_fpga.bit; then
-        fatload mmc 0:1 ${addr_dtb} firmware_fpga.bit
-        run program_fpga_mmc
-    fi
-    if test -e mmc 0:1 /${nm_krnl} && test -e mmc 0:1 /${nm_dtb}; then
-        run bootmode_mmc0
-        if test $? -eq 0 && test -e mmc 0:2 /bin/sh; then
-            echo "Config mmc root=/dev/mmcblk0p2"
-            setenv bootargs ${bootargs_min} root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait cma=128M
-            bootm ${addr_krnl} - ${addr_dtb}
-        fi
-    fi
-    if test -e mmc 0:1 /${nm_rtfs}; then
-        echo "Config mmc0_uram"
-        setenv bootmode_mmc_run ${bootmode_mmc0}'&& fatload mmc 0:1 ${addr_rtfs} ${nm_rtfs}'
-        run bootmode_mmc_run
-        if test $? -eq 0; then
-            bootm ${addr_krnl} ${addr_rtfs} ${addr_dtb}
-        fi
-    elif test -e mmc 0:1 /image.ub; then
-        echo "Config mmc0_ram"
-        fatload mmc 0:1 0x2000000 image.ub
-        bootm 0x2000000
-    fi
-fi
-mmc dev 1
-if test $? -eq 0; then
-    if test -e mmc 1:1 /firmware_fpga.bit; then
-        fatload mmc 1:1 ${addr_dtb} firmware_fpga.bit
-        run program_fpga_mmc
-    fi
-    if test -e mmc 1:1 /${nm_krnl} && test -e mmc 1:1 /${nm_dtb}; then
-        run bootmode_mmc1
-        if test $? -eq 0 && test -e mmc 1:2 /bin/sh; then
-            echo "Config mmc root=/dev/mmcblk1p2"
-            setenv bootargs ${bootargs_min} root=/dev/mmcblk1p2 rw rootfstype=ext4 rootwait cma=128M
-            bootm ${addr_krnl} - ${addr_dtb}
-        fi
-    fi
-    if test -e mmc 1:1 /${nm_rtfs}; then
-        echo "Config mmc1_uram"
-        setenv bootmode_mmc_run ${bootmode_mmc1}'&& fatload mmc 1:1 ${addr_rtfs} ${nm_rtfs}'
-        run bootmode_mmc_run
-        if test $? -eq 0; then
-            bootm ${addr_krnl} ${addr_rtfs} ${addr_dtb}
-        fi
-    elif test -e mmc 1:1 /image.ub; then
-        echo "Config mmc1_ram"
-        fatload mmc 1:1 0x2000000 image.ub
-        bootm 0x2000000
-    fi
-fi
 sf probe 0 0 0
 if test $? -eq 0; then
-    echo "Config qspi_ram"
-    run load_bitstream_qspi
-    lzmadec ${addr_dtb} ${addr_rtfs}
-    fpga loadb 0 ${addr_rtfs} ${filesize}
     run bootmode_qspi
     if test $? -eq 0; then
         bootm ${addr_krnl}
