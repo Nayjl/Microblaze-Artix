@@ -1,0 +1,24 @@
+
+EMBEDDEDSW_XLNX_VERSION = $(subst ",,$(BR2_PACKAGE_VER_EMBEDDEDSW_XLNX))
+EMBEDDEDSW_XLNX_SITE = $(call github,Xilinx,embeddedsw,$(EMBEDDEDSW_XLNX_VERSION))
+EMBEDDEDSW_XLNX_INSTALL_HOST = NO
+
+ifeq ($(BR2_PACKAGE_SERIAS_XLNX_CHIP_ZYNQ),y)
+EMBEDDEDSW_XLNX_SERIES = Zynq
+else ifeq ($(BR2_PACKAGE_SERIAS_XLNX_CHIP_ZYNQMP),y)
+EMBEDDEDSW_XLNX_SERIES = Zynqmp
+else
+EMBEDDEDSW_XLNX_SERIES = Zynq
+endif
+
+EMBEDDEDSW_XLNX_XSCT = $(subst ",,$(BR2_PACKAGE_XLNX_TOOLS_SW)/xsct)
+
+define HOST_EMBEDDEDSW_XLNX_BUILD_CMDS
+	$(EMBEDDEDSW_XLNX_XSCT) -eval \
+		"source $(HOST_EMBEDDEDSW_XLNX_PKGDIR)build_script.tcl; build_all \
+		-repo $(@D) \
+		-serias $(EMBEDDEDSW_XLNX_SERIES) \
+		-hwpth $(subst ",,$(BR2_PACKAGE_XLNX_HW_SPECIFIED))"
+endef
+
+$(eval $(host-generic-package))

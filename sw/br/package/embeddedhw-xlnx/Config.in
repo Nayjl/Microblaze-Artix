@@ -1,0 +1,6 @@
+config BR2_PACKAGE_EMBEDDEDHW_XLNX
+    bool "Xilinx embeddedhw recovery project Vivado"
+    depends on BR2_PACKAGE_XILINX_TOOLS
+    help
+        Recovery project Vivado
+

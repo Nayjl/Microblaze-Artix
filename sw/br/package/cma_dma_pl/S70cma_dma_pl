@@ -1,0 +1,35 @@
+#!/bin/sh
+
+test -r /lib/modules/$(uname -r)/updates/cma_dma_pl.ko
+
+start() {
+	modprobe cma_dma_pl
+	printf "Starting cma_dma_pl: OK\n"
+}
+
+stop() {
+	modprobe -r cma_dma_pl
+	printf "Stoping cma_dma_pl: OK\n"
+}
+
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

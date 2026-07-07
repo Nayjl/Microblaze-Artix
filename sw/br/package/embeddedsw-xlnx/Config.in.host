@@ -1,0 +1,12 @@
+config BR2_PACKAGE_HOST_EMBEDDEDSW_XLNX
+    bool "host Xilinx embeddedsw repository"
+    help
+        Download and generate baremetal app fsbl or pmufw using Xilinx tools.
+
+if BR2_PACKAGE_HOST_EMBEDDEDSW_XLNX
+
+config BR2_PACKAGE_VER_EMBEDDEDSW_XLNX
+    string "embeddedsw git version"
+    default "xilinx_v2023.2"
+
+endif # BR2_PACKAGE_HOST_EMBEDDEDSW_XLNX

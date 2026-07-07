@@ -1,0 +1,4 @@
+#!/bin/sh
+
+
+insmod /lib/modules/$(uname -r)/extra/irq_pl.ko

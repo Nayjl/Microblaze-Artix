@@ -1,2 +1,2 @@
-name: CUSTOM_PACKAGE
-desc: Project for board CUSTOM_PACKAGE
+name: OVERLAY_PKGS
+desc: Packages for Zynq

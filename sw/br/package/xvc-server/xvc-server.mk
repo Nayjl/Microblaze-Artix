@@ -1,15 +1,24 @@
-XVC_SERVER_VERSION = 0.0.1
-XVC_SERVER_SITE = $(BR2_EXTERNAL_CUSTOM_PACKAGE_PATH)/dl/xvc-server
-XVC_SERVER_SITE_METHOD = local
-# XVC_SERVER_LICENSE = All Rights Reserved
-# XVC_SERVER_LICENSE_FILES =
+XVC_SERVER_VERSION = v0.1.0
+XVC_SERVER_SITE = $(call github,Nayjl,xvc-server,$(XVC_SERVER_VERSION))
+
+XVC_SERVER_DEPENDENCIES = linux host-pkgconf
+XVC_SERVER_MAKE_ENV =
 
 define XVC_SERVER_BUILD_CMDS
-	$(MAKE) -C $(@D) all
+	$(TARGET_MAKE_ENV) $(XVC_SERVER_MAKE_ENV) $(MAKE) -C $(@D) \
+		CC=$(TARGET_CC) \
+		CFLAGS="$(TARGET_CFLAGS)" \
+		CPPFLAGS="$(TARGET_CPPFLAGS)" \
+		LDFLAGS="$(TARGET_LDFLAGS)" all
 endef
 
 define XVC_SERVER_INSTALL_TARGET_CMDS
-	$(INSTALL) -D -m 0755 $(@D)/xvc-server-$(XVC_SERVER_VERSION) $(TARGET_DIR)/usr/bin/xvc
+	$(TARGET_MAKE_ENV) $(XVC_SERVER_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR=$(TARGET_DIR) install
 endef
+# 	$(INSTALL) -D -m 0755 $(@D)/udevmem $(TARGET_DIR)/usr/bin/udevmem
+
+# define XVC_SERVER_INSTALL_STAGING_CMDS
+# 	$(TARGET_MAKE_ENV) $(XVC_SERVER_MAKE_ENV) $(MAKE) -C $(@D) DESTDIR=$(STAGING_DIR) install
+# endef
 
 $(eval $(generic-package))

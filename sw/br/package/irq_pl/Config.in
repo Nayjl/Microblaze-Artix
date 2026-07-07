@@ -1,0 +1,3 @@
+config BR2_PACKAGE_IRQ_PL
+    bool "irq_f2p handlers driver"
+    depends on BR2_LINUX_KERNEL

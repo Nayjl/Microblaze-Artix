@@ -1,0 +1,27 @@
+/dts-v1/;
+/ {
+    description = "U-Boot";
+    #address-cells = <1>;
+    images {
+	uboot {
+	    description = "U-Boot";
+	    data = /incbin/("u-boot.bin");
+	    type = "standalone";
+	    arch = "arm";
+	    os = "U-Boot";
+	    compression = "none";
+	    load = <${UBOOT_ENTRY}>;
+	    entry = <${UBOOT_ENTRY}>;
+	    hash {
+		algo = "crc32";
+	    };
+	};
+    };
+    configurations {
+	default = "conf";
+	conf {
+	    description = "U-Boot";
+	    loadables = "uboot";
+	};
+    };
+};

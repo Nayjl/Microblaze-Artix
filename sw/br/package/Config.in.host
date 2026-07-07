@@ -1,0 +1,61 @@
+menu "Host target package"
+
+menu "Xilinx tools"
+
+config BR2_PACKAGE_XLNX_TOOLS_VERSION
+    string "Version Xilinx Tools"
+    default "2019.1"
+
+choice
+    prompt "Target chip series"
+    default BR2_PACKAGE_SERIAS_XLNX_CHIP_ZYNQ
+
+config BR2_PACKAGE_SERIAS_XLNX_CHIP_ZYNQ
+    bool "Zynq-7000"
+
+config BR2_PACKAGE_SERIAS_XLNX_CHIP_ZYNQMP
+    bool "Zynq UltraScale+ MPSoC"
+
+config BR2_PACKAGE_SERIAS_XLNX_CHIP_MICROBLAZE
+    bool "Microblaze"
+
+endchoice # "Target chip series"
+
+menu "Xilinx hardware"
+
+config BR2_PACKAGE_XLNX_TOOLS_HW
+    string "Path to vivado"
+    default "$(XLNX19_HW)"
+
+config BR2_PACKAGE_XLNX_HW_PRJ
+    string "path project vivado"
+    default "$(PWD)/hw/prj_hw/qmtech_lnx"
+
+config BR2_PACKAGE_XLNX_HW_BD
+    string "path source block design"
+    default "$(PWD)/hw/src/bd"
+
+# source "$BR2_EXTERNAL_OVERLAY_PKGS_PATH/package/embeddedhw-xlnx/Config.in"
+
+endmenu # "Xilinx hardware"
+
+menu "Xilinx Software"
+
+config BR2_PACKAGE_XLNX_TOOLS_SW
+    string "Path to xsct"
+     default "$(XLNX19_SW)"
+
+config BR2_PACKAGE_XLNX_HW_SPECIFIED
+    string "Path to hardware specification (*.hdf or *.xsa)"
+    default "$(BR2_EXTERNAL_OVERLAY_PKGS_PATH)/board/$(BR2_TARGET_GENERIC_HOSTNAME)/hw-spec"
+
+source "$BR2_EXTERNAL_OVERLAY_PKGS_PATH/package/device-tree-xlnx/Config.in.host"
+source "$BR2_EXTERNAL_OVERLAY_PKGS_PATH/package/embeddedsw-xlnx/Config.in.host"
+
+endmenu # "Xilinx Software"
+
+endmenu # "Xilinx tools"
+
+# source "$BR2_EXTERNAL_OVERLAY_PKGS_PATH/package/zynq-mkbootimage/Config.in.host"
+
+endmenu # "Host target package"

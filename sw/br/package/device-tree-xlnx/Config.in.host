@@ -1,0 +1,28 @@
+menuconfig BR2_PACKAGE_HOST_DEVICE_TREE_XLNX
+    bool "host Xilinx device-tree-xlnx repository"
+    help
+        Download and generate device trees using Xilinx tools.
+
+if BR2_PACKAGE_HOST_DEVICE_TREE_XLNX
+
+config BR2_PACKAGE_VER_DEVICETREE_XLNX
+    string "device-tree-xlnx git version"
+    default "xilinx_v2023.2"
+    help
+        Version git repository
+
+config BR2_PACKAGE_DEVICETREE_XLNX_TO_BLOB
+    bool "build device-tree to dtb"
+
+config BR2_PACKAGE_DEVICETREE_XLNX_EN_OVERLAY
+    bool "device-tree overlay"
+
+if BR2_PACKAGE_DEVICETREE_XLNX_EN_OVERLAY
+
+config BR2_PACKAGE_DEVICETREE_XLNX_OVERLAY
+    string "path device-tree overlay"
+    default "$(BR2_PACKAGE_XLNX_HW_SPECIFIED)/user-top.dts"
+
+endif # BR2_PACKAGE_DEVICETREE_XLNX_EN_OVERLAY
+
+endif # BR2_PACKAGE_HOST_DEVICE_TREE_XLNX

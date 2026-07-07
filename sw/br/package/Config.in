@@ -1,0 +1,23 @@
+menu "Target external package"
+
+menu "Libraries"
+
+
+
+endmenu # "Libraries"
+
+menu "Kernel modules"
+
+source "$BR2_EXTERNAL_OVERLAY_PKGS_PATH/package/cma_dma_pl/Config.in"
+
+endmenu # "Kernel modules"
+
+menu "Applications"
+
+source "$BR2_EXTERNAL_OVERLAY_PKGS_PATH/package/xvc-server/Config.in"
+source "$BR2_EXTERNAL_OVERLAY_PKGS_PATH/package/xadc-lnx/Config.in"
+source "$BR2_EXTERNAL_OVERLAY_PKGS_PATH/package/udevmem/Config.in"
+
+endmenu # "Applications"
+
+endmenu # "Target external package"

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_HOST_ZYNQ_MKBOOTIMAGE
+	bool "host zynq-mkbootimage"
+ 	select BR2_PACKAGE_HOST_ELFUTILS
+	help
+	  This is an open-source replacement for the Xilinx bootgen application.
+	  https://github.com/antmicro/zynq-mkbootimage
