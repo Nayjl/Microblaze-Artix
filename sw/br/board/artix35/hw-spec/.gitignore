@@ -7,7 +7,11 @@ RemoteSystemsTempFiles/
 *hw_platform_0/
 webtalk/
 *.hdf
+*.xsa
+*.bit
 devicetree.dts
+device-tree/
+*.mmi
 
 #Vivado logs
 *.log

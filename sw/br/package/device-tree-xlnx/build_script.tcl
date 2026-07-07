@@ -57,7 +57,9 @@ proc build_dts {args} {
         puts "ERROR: Not found ${repos_xilinx} repo"
         exit 1
     }
-    if {$serias_chip == "Zynq"} {
+    if {$serias_chip == "Microblaze"} {
+        set select_core microblaze_0
+    } elseif {$serias_chip == "Zynq"} {
         set select_core ps7_cortexa9_0
     } else {
         set select_core psu_cortexa53_0
