@@ -1,0 +1,31 @@
+
+#define QSPI_OFFSET_BOOT_SCR 0x100000
+#define QSPI_OFFSET_IMAGE 0x290000
+
+&qspi {
+	flash@0 {
+        compatible = "jedec,spi-nor";
+        reg = <0>;
+		spi-tx-bus-width = <4>;
+		spi-rx-bus-width = <4>;
+        spi-max-frequency = <25000000>;
+        #address-cells = <1>;
+		#size-cells = <1>;
+        partition@qspi-all {
+            label = "qspi-all";
+            reg = <0x00 0>;
+        };
+        partition@qspi-boot {
+			label = "qspi-boot";
+			reg = <0x0 QSPI_OFFSET_BOOT_SCR>;
+		};
+        partition@qspi-boot-scr {
+			label = "qspi-boot-scr";
+			reg = <QSPI_OFFSET_BOOT_SCR (QSPI_OFFSET_IMAGE - QSPI_OFFSET_BOOT_SCR)>;
+		};
+        partition@qspi-linux {
+			label = "qspi-linux";
+			reg = <QSPI_OFFSET_IMAGE 0>;
+		};
+    };
+};
