@@ -19,7 +19,7 @@ clean-all: clean ip-cores-clean
 	@rm -rfv $(VIVADO_PRJ_PATH)
 
 ip-cores-clean:
-	@find ip-cores \( \
+	@find ip_cores \( \
 		-name "*.cache" -o \
 		-name "*.hw" -o \
 		-name "*.ip_user_files" -o \
