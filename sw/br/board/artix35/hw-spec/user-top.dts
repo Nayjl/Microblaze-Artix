@@ -1,5 +1,5 @@
 /dts-v1/;
 #include "system-top.dts"
-
+#include "qspi.dtsi"
 
 

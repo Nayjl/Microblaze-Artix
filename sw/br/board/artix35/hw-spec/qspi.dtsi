@@ -2,7 +2,7 @@
 #define QSPI_OFFSET_BOOT_SCR 0x100000
 #define QSPI_OFFSET_IMAGE 0x290000
 
-&qspi {
+&axi_quad_spi_0 {
 	flash@0 {
         compatible = "jedec,spi-nor";
         reg = <0>;
