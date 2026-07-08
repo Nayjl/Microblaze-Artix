@@ -12,6 +12,9 @@ webtalk/
 devicetree.dts
 device-tree/
 *.mmi
+fsbl_bsp
+Debug
+
 
 #Vivado logs
 *.log
